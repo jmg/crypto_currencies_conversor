@@ -8,35 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="198dp"
-        android:text="Amount" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginLeft="29dp"
-        android:text="Convert" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
-        android:layout_marginLeft="29dp"
-        android:ems="10" />
-
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -56,7 +29,7 @@
         android:text="Bitcoin - Usd" />
 
     <TextView
-        android:id="@+id/litecoin_value"
+        android:id="@+id/btc_usd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
@@ -64,10 +37,10 @@
         android:text="value" />
 
     <TextView
-        android:id="@+id/bitcoin_value"
+        android:id="@+id/ltc_usd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/litecoin_value"
+        android:layout_alignLeft="@+id/btc_usd"
         android:layout_below="@+id/textView3"
         android:text="value" />
 
@@ -75,9 +48,91 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bitcoin_value"
-        android:layout_below="@+id/litecoin_value"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/btc_usd"
         android:layout_marginTop="25dp"
         android:text="Litecoin - Usd" />
+
+    <Button
+        android:id="@+id/update_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginRight="42dp"
+        android:text="Update" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/update_btn"
+        android:layout_alignTop="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/from_combo"
+        android:layout_marginTop="102dp"
+        android:text="Amount" />
+
+    <EditText
+        android:id="@+id/amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/results_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/amount_text"
+        android:text="value" />
+
+    <Button
+        android:id="@+id/convert_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/results_value"
+        android:onClick="convertBtnClick"
+        android:text="Convert" />
+
+    <Spinner
+        android:id="@+id/to_combo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/from_combo"
+        android:layout_below="@+id/from_combo"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ltc_usd"
+        android:layout_below="@+id/progressBar1"
+        android:text="From" />
+
+    <Spinner
+        android:id="@+id/from_combo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/progressBar1"
+        android:layout_below="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/from_combo"
+        android:layout_toRightOf="@+id/linearLayout1"
+        android:text="To" />
 
 </RelativeLayout>

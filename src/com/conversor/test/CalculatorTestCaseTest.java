@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.conversor.bitcoin.CoinCalculator;
+import com.conversor.bitcoin.Currency;
 
 public class CalculatorTestCaseTest {
 	
@@ -25,18 +26,18 @@ public class CalculatorTestCaseTest {
 	public void testGetPrices(){				
 		
 		Type expectedType = new ArrayList<HashMap<String, String>>().getClass();	
-		assertEquals(expectedType, coinCalculator.getPrices().getClass());
+		assertEquals(expectedType, coinCalculator.getCoinApi().getPrices().getClass());
 	}
 	
 	@Test
 	public void testGetPrice(){				
 		
-		String currency = "btc/usd";
+		String currency = "btc_usd";
 		
 		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
 		assertTrue(coinCalculator.getFloatPrice(currency) > 0.0);
 		
-		currency = "ltc/usd";
+		currency = "ltc_usd";
 		
 		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
 		assertTrue(coinCalculator.getFloatPrice(currency) > 0.0);
@@ -45,7 +46,7 @@ public class CalculatorTestCaseTest {
 	@Test
 	public void testGetInvalidPrice(){				
 		
-		String currency = "ars/usd";
+		String currency = "ars_usd";
 		
 		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
 		assertTrue(coinCalculator.getFloatPrice(currency) == 0.0);		

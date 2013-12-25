@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,22 +20,22 @@ public class CoinApi {
 	
 	public ArrayList<HashMap<String,String>> getPrices() {
 		
-		ArrayList<HashMap<String,String>> prices = null;
+		String data = null;
 		
-	    String data;
 		try {
-			
-			data = makeRequest(this.url, "");
-			Type listType = new TypeToken<ArrayList<HashMap<String,String>>>(){}.getType();
-		    prices = new Gson().fromJson(data, listType);
-			
+			 data = makeRequest(this.url, "");
 		} catch (IOException e) {
 			
-			prices = new ArrayList<HashMap<String,String>>();
-			e.printStackTrace();
-		}	    	   	      	  
-
-	    return prices;
+			return new ArrayList<HashMap<String,String>>();
+		}	
+		
+	    return parseJson(data);
+	}
+	
+	private ArrayList<HashMap<String,String>> parseJson(String json) {
+			
+		Type listType = new TypeToken<ArrayList<HashMap<String,String>>>(){}.getType();
+		return new Gson().fromJson(json, listType);
 	}
 
 	private String makeRequest(String _url, String urlParameters) throws IOException {
@@ -74,6 +73,7 @@ public class CoinApi {
         
         rd.close();
         connection.disconnect();
+        
         return response.toString();       
 	}
 }

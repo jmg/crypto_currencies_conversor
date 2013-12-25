@@ -8,48 +8,117 @@ import com.example.bitcoin.R;
 public class CoinCalculator {
 	
 	private CoinApi coinApi = new CoinApi();
-	private ArrayList<HashMap<String, String>> prices = null;
+	private ArrayList<Currency> currencies = new ArrayList<Currency>();
+	private ArrayList<ValidCurrency> validCurrencies = new ArrayList<ValidCurrency>();
 
 	public CoinCalculator() {
 		
-		this.prices = coinApi.getPrices();
-	}
-	
-	public HashMap<String, Integer> getCurrencies() {
+		this.validCurrencies.add(new ValidCurrency("btc_usd", R.id.btc_usd, "Bitcoin"));
+		this.validCurrencies.add(new ValidCurrency("ltc_usd", R.id.ltc_usd, "Litecoin"));		
 		
-		HashMap<String,Integer> currencies = new HashMap<String, Integer>();
-    	currencies.put("btc/usd", R.id.bitcoin_value);
-    	currencies.put("ltc/usd", R.id.litecoin_value);
-    	
-    	return currencies;
-	}
-	
-	private String searchPrice(String currency){
-		
-		for (HashMap<String, String> obj : prices) {
+		for (HashMap<String, String> map : coinApi.getPrices()) {
 			
-			if (obj.get("id").equals(currency)) {
-				return obj.get("price");
+			String id = map.get("id").replace("/", "_");
+			
+			ValidCurrency validCurrency = this.getValidCurrency(id);
+			
+			if (validCurrency != null) {
+								
+				String price = map.get("price");
+			
+				Currency currency = new Currency(id, price, validCurrency.getName());
+				currency.setLayoutId(validCurrency.getLayoutId());
+				
+				this.currencies.add(currency);
+			}
+		}
+		
+		this.currencies.add(new Currency("usd", "1", "Dollars"));
+	}
+	
+	private ValidCurrency getValidCurrency(String currency) {
+		
+		for (ValidCurrency validCurrency : this.validCurrencies) {
+			
+			if (validCurrency.getId().equals(currency)) {
+				return validCurrency;
+			}
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Currency> getCurrencies() {
+				
+    	return this.currencies;
+	}
+	
+	private String searchPrice(Currency otherCurrency){
+		
+		for (Currency currency : currencies) {
+			
+			if (currency.equals(otherCurrency)) {
+				return currency.getPrice();
 			}
 		}
 		
 		return "0";
 	}
 
-	public String getPrice(String currency) {
+	public String getPrice(Currency currency) {
 		
 		return this.searchPrice(currency);
 	}
 	
+	public Currency getCurrencyById(String id) {
+		
+		for (Currency currencyObj : currencies) {
+			
+			if(id.equals(currencyObj.getId())) {
+				return currencyObj;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Currency getCurrencyByName(String name) {
+		
+		for (Currency currencyObj : currencies) {
+			
+			if(name.equals(currencyObj.getName())) {
+				return currencyObj;
+			}
+		}
+		
+		return null;
+	}
+	
+	public String getPrice(String currency) {
+				
+		return this.getPrice(this.getCurrencyById(currency));
+	}
+		
 	public Float getFloatPrice(String currency) {
 		
-		String price = this.getPrice(currency);
-		return Float.parseFloat(price);
+		return this.getCurrencyById(currency).getFloatPrice();
 	}
 
-	public ArrayList<HashMap<String, String>> getPrices() {
+	public String convert(String from, String to, String amount) {
+		
+		Currency currencyFrom = this.getCurrencyByName(from);
+		Currency currencyTo = this.getCurrencyByName(to);
+		
+		Float famount = Float.parseFloat(amount);
+		
+		Float result = famount / currencyFrom.getFloatPrice();
+		
+		return result.toString();
+	}
 
-		return this.prices;
+	public CoinApi getCoinApi() {
+
+		return coinApi;
 	}
 
 }

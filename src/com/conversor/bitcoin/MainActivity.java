@@ -1,10 +1,11 @@
 package com.conversor.bitcoin;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import com.example.bitcoin.R;
+import com.example.bitcoin.R.layout;
+import com.example.bitcoin.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

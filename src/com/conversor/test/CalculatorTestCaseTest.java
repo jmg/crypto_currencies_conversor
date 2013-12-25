@@ -35,6 +35,20 @@ public class CalculatorTestCaseTest {
 		
 		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
 		assertTrue(coinCalculator.getFloatPrice(currency) > 0.0);
+		
+		currency = "ltc/usd";
+		
+		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
+		assertTrue(coinCalculator.getFloatPrice(currency) > 0.0);
+	}
+	
+	@Test
+	public void testGetInvalidPrice(){				
+		
+		String currency = "ars/usd";
+		
+		assertEquals(String.class, coinCalculator.getPrice(currency).getClass());
+		assertTrue(coinCalculator.getFloatPrice(currency) == 0.0);		
 	}
 
 }

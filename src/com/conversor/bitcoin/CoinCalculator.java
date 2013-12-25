@@ -18,8 +18,8 @@ public class CoinCalculator {
 	public HashMap<String, Integer> getCurrencies() {
 		
 		HashMap<String,Integer> currencies = new HashMap<String, Integer>();
-    	currencies.put("btc", R.id.bitcoin_value);
-    	currencies.put("ltc", R.id.litecoin_value);
+    	currencies.put("btc/usd", R.id.bitcoin_value);
+    	currencies.put("ltc/usd", R.id.litecoin_value);
     	
     	return currencies;
 	}

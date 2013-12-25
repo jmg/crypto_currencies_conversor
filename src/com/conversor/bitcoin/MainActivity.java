@@ -1,9 +1,10 @@
-package com.example.bitcoin;
+package com.conversor.bitcoin;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import com.example.bitcoin.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -26,11 +27,7 @@ public class MainActivity extends Activity {
 
     private void initialize() {
     	
-    	HashMap<String,Integer> currencies = new HashMap<String, Integer>();
-    	currencies.put("btc", R.id.bitcoin_value);
-    	currencies.put("ltc", R.id.litecoin_value);
-    	
-    	Iterator<Map.Entry<String, Integer>> it = currencies.entrySet().iterator();
+    	Iterator<Map.Entry<String, Integer>> it = coinCalculator.getCurrencies().entrySet().iterator();
     	
         while (it.hasNext()) {
         	

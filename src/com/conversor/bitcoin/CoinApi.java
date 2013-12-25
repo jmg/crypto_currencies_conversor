@@ -1,25 +1,35 @@
-package com.example.bitcoin;
+package com.conversor.bitcoin;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class CoinApi {
 	
 	private String url = "http://www.cryptocoincharts.info/v2/api/tradingPairs";
 	
-	public String getPrices() {
+	public ArrayList<HashMap<String,String>> getPrices() {
 		
 	    String data = makeRequest(this.url, "");
 	    
-	    return data;
+	    Type listType = new TypeToken<ArrayList<HashMap<String,String>>>(){}.getType();
+	    ArrayList<HashMap<String,String>> prices = new Gson().fromJson(data, listType);
+
+	    return prices;
 	}
 
 	private String makeRequest(String _url, String urlParameters) {
+		
 		URL url;
 	    HttpURLConnection connection = null;
 	    
@@ -27,8 +37,6 @@ public class CoinApi {
 	        url = new URL(_url);
 	        connection = (HttpURLConnection)url.openConnection();
 	        connection.setRequestMethod("POST");
-	        connection.setRequestProperty("Content-Type", 
-	             "application/x-www-form-urlencoded");
 	  			
 	        connection.setRequestProperty("Content-Length", "" + 
 	                 Integer.toString(urlParameters.getBytes().length));
@@ -51,8 +59,8 @@ public class CoinApi {
 	        String line;
 	        StringBuffer response = new StringBuffer(); 
 	        while((line = rd.readLine()) != null) {
-	          response.append(line);
-	          response.append('\r');
+	        	response.append(line);
+	        	response.append('\r');
 	        }
 	        rd.close();
 	        return response.toString();

@@ -12,9 +12,16 @@ public class CoinCalculator {
 	private ArrayList<ValidCurrency> validCurrencies = new ArrayList<ValidCurrency>();
 
 	public CoinCalculator() {
-		
+				
 		this.validCurrencies.add(new ValidCurrency("btc_usd", R.id.btc_usd, "Bitcoin"));
-		this.validCurrencies.add(new ValidCurrency("ltc_usd", R.id.ltc_usd, "Litecoin"));		
+		this.validCurrencies.add(new ValidCurrency("ltc_usd", R.id.ltc_usd, "Litecoin"));
+		
+		setCurrencies();		
+	}
+
+	private void setCurrencies() {
+		
+		this.currencies = new ArrayList<Currency>();
 		
 		for (HashMap<String, String> map : coinApi.getPrices()) {
 			
@@ -53,21 +60,13 @@ public class CoinCalculator {
     	return this.currencies;
 	}
 	
-	private String searchPrice(Currency otherCurrency){
-		
-		for (Currency currency : currencies) {
-			
-			if (currency.equals(otherCurrency)) {
-				return currency.getPrice();
-			}
-		}
-		
-		return "0";
-	}
-
 	public String getPrice(Currency currency) {
 		
-		return this.searchPrice(currency);
+		if (currency == null) {
+			return "0";
+		}
+		
+		return currency.getPrice();
 	}
 	
 	public Currency getCurrencyById(String id) {
@@ -101,7 +100,12 @@ public class CoinCalculator {
 		
 	public Float getFloatPrice(String currency) {
 		
-		return this.getCurrencyById(currency).getFloatPrice();
+		Currency currencyObj = this.getCurrencyById(currency);
+		if (currencyObj == null) {
+			return Float.valueOf(0);
+		}
+		
+		return currencyObj.getFloatPrice();
 	}
 
 	public String convert(String from, String to, String amount) {
@@ -111,7 +115,7 @@ public class CoinCalculator {
 		
 		Float famount = Float.parseFloat(amount);
 		
-		Float result = famount / currencyFrom.getFloatPrice();
+		Float result = famount * currencyFrom.getFloatPrice() / currencyTo.getFloatPrice();
 		
 		return result.toString();
 	}
@@ -119,6 +123,11 @@ public class CoinCalculator {
 	public CoinApi getCoinApi() {
 
 		return coinApi;
+	}
+
+	public void update() {
+		
+		this.setCurrencies();
 	}
 
 }

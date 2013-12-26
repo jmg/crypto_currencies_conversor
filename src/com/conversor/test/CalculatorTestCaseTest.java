@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.conversor.bitcoin.CoinCalculator;
-import com.conversor.bitcoin.Currency;
+
 
 public class CalculatorTestCaseTest {
 	

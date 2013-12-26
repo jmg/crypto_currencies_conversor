@@ -60,6 +60,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/textView2"
         android:layout_marginRight="42dp"
+        android:onClick="updateBtnClick"
         android:text="Update" />
 
     <ProgressBar
@@ -67,7 +68,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/update_btn"
-        android:layout_alignTop="@+id/textView3" />
+        android:layout_alignTop="@+id/textView3"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView1"
@@ -109,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/from_combo"
+        android:layout_alignRight="@+id/from_combo"
         android:layout_below="@+id/from_combo"
         android:layout_marginTop="19dp" />
 
@@ -124,8 +127,8 @@
         android:id="@+id/from_combo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/progressBar1"
-        android:layout_below="@+id/textView4" />
+        android:layout_below="@+id/textView4"
+        android:layout_toLeftOf="@+id/update_btn" />
 
     <TextView
         android:id="@+id/to_label"

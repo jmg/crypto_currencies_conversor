@@ -19,7 +19,7 @@ public class CoinApi {
 	private String url = "http://www.cryptocoincharts.info/v2/api/tradingPairs";
 	
 	public ArrayList<HashMap<String,String>> getPrices() {
-		
+				
 		String data = null;
 		
 		try {

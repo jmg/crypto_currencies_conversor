@@ -1,18 +1,15 @@
 package com.conversor.bitcoin;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 import com.example.bitcoin.R;
-import com.example.bitcoin.R.layout;
-import com.example.bitcoin.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,15 +40,20 @@ public class MainActivity extends Activity {
         	}
 
         	final TextView textView = (TextView) findViewById(currency.getLayoutId());
-        	textView.setText(this.coinCalculator.getPrice(currency.getId()));        	
+        	String value = this.coinCalculator.getFloatPrice(currency.getId()).toString();
+        	textView.setText("$" + value);
         }
         
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner);
         Spinner fromCombo = (Spinner) findViewById(R.id.from_combo);
         fromCombo.setAdapter(adapter);
+        fromCombo.setSelection(1);
         	
         Spinner toCombo = (Spinner) findViewById(R.id.to_combo);
         toCombo.setAdapter(adapter);
+        toCombo.setSelection(2);
+        
+        this.convertBtnClick(null);
 	}
 
 	@Override
@@ -76,7 +78,18 @@ public class MainActivity extends Activity {
 			result = "Please insert a valid amount.";
 		}
 				
-		resultsView.setText(result);
+		resultsView.setText("$" + result);
 	}
-    
+	
+	public void updateBtnClick(View view) {
+		
+		ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar1);
+		
+		bar.setVisibility(View.VISIBLE);
+		
+		this.coinCalculator.update();
+		
+		bar.setVisibility(View.INVISIBLE);
+		
+	}
 }

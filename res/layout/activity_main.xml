@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,133 +10,30 @@
     tools:context=".MainActivity" >
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="37dp"
-        android:layout_toLeftOf="@+id/textView1"
         android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/currencies_conatiner_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/calculador_btn"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:onClick="openCalculatorClick"
+                android:text="Calculator" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="18dp"
-        android:text="Bitcoin - Usd" />
-
-    <TextView
-        android:id="@+id/btc_usd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:text="value" />
-
-    <TextView
-        android:id="@+id/ltc_usd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btc_usd"
-        android:layout_below="@+id/textView3"
-        android:text="value" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/btc_usd"
-        android:layout_marginTop="25dp"
-        android:text="Litecoin - Usd" />
-
-    <Button
-        android:id="@+id/update_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_marginRight="42dp"
-        android:onClick="updateBtnClick"
-        android:text="Update" />
-
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/update_btn"
-        android:layout_alignTop="@+id/textView3"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/from_combo"
-        android:layout_marginTop="102dp"
-        android:text="Amount" />
-
-    <EditText
-        android:id="@+id/amount_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/textView1"
-        android:ems="10"
-        android:text="1" />
-
-    <TextView
-        android:id="@+id/results_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/amount_text"
-        android:text="value" />
-
-    <Button
-        android:id="@+id/convert_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/results_value"
-        android:onClick="convertBtnClick"
-        android:text="Convert" />
-
-    <Spinner
-        android:id="@+id/to_combo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/from_combo"
-        android:layout_alignRight="@+id/from_combo"
-        android:layout_below="@+id/from_combo"
-        android:layout_marginTop="19dp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ltc_usd"
-        android:layout_below="@+id/progressBar1"
-        android:text="From" />
-
-    <Spinner
-        android:id="@+id/from_combo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_toLeftOf="@+id/update_btn" />
-
-    <TextView
-        android:id="@+id/to_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/from_combo"
-        android:layout_toRightOf="@+id/linearLayout1"
-        android:text="To" />
-
-</RelativeLayout>
+</ScrollView>

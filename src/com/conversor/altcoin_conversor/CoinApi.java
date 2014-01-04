@@ -1,4 +1,4 @@
-package com.conversor.bitcoin;
+package com.conversor.altcoin_conversor;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -23,7 +23,7 @@ public class CoinApi {
 		String data = null;
 		
 		try {
-			 data = makeRequest(this.url, "");
+			 data = makeRequest(this.url, "pairs=btc_usd,ltc_usd,nmc_usd,ppc_usd,xpm_usd,wdc_usd,ftc_usd");
 		} catch (IOException e) {
 			
 			return new ArrayList<HashMap<String,String>>();

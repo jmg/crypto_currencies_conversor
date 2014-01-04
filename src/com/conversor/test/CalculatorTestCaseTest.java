@@ -9,7 +9,7 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.conversor.bitcoin.CoinCalculator;
+import com.conversor.altcoin_conversor.CoinCalculator;
 
 
 public class CalculatorTestCaseTest {
@@ -19,7 +19,7 @@ public class CalculatorTestCaseTest {
 	@Before
 	public void setUp() {
 		
-		this.coinCalculator = new CoinCalculator();
+		this.coinCalculator = CoinCalculator.getInstance();
 	}
 
 	@Test

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.bitcoin;
+package com.example.atlcoin_conversor;
 
 public final class R {
     public static final class attr {
@@ -24,25 +24,24 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
-        public static final int amount_text=0x7f080009;
-        public static final int btc_usd=0x7f080003;
-        public static final int convert_btn=0x7f08000b;
-        public static final int from_combo=0x7f080008;
-        public static final int linearLayout1=0x7f080000;
-        public static final int ltc_usd=0x7f080004;
-        public static final int progressBar1=0x7f080007;
-        public static final int results_value=0x7f08000a;
-        public static final int textView1=0x7f080001;
-        public static final int textView2=0x7f080002;
-        public static final int textView3=0x7f080005;
-        public static final int textView4=0x7f08000d;
-        public static final int to_combo=0x7f08000c;
-        public static final int to_label=0x7f08000e;
-        public static final int update_btn=0x7f080006;
+        public static final int LinearLayout1=0x7f080003;
+        public static final int ScrollView1=0x7f080000;
+        public static final int action_settings=0x7f08000d;
+        public static final int amount_text=0x7f080005;
+        public static final int calculador_btn=0x7f080002;
+        public static final int convert_btn=0x7f080009;
+        public static final int currencies_conatiner_lyt=0x7f080001;
+        public static final int exchange_rate_btn=0x7f08000c;
+        public static final int from_combo=0x7f08000b;
+        public static final int results_value=0x7f080006;
+        public static final int textView1=0x7f080004;
+        public static final int textView4=0x7f080007;
+        public static final int to_combo=0x7f080008;
+        public static final int to_label=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int calculator=0x7f030001;
     }
     public static final class menu {
         public static final int main=0x7f070000;

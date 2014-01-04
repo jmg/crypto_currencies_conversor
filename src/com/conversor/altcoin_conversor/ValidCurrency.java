@@ -1,15 +1,13 @@
-package com.conversor.bitcoin;
+package com.conversor.altcoin_conversor;
 
 public class ValidCurrency {
 	
 	private String id;
-	private Integer layoutId;
 	private String name;
 	
-	public ValidCurrency(String id, Integer layoutId, String name) {
+	public ValidCurrency(String id, String name) {
 		super();
 		this.id = id;
-		this.layoutId = layoutId;
 		this.setName(name);
 	}
 	
@@ -19,14 +17,6 @@ public class ValidCurrency {
 	
 	public void setId(String id) {
 		this.id = id;
-	}
-	
-	public Integer getLayoutId() {
-		return layoutId;
-	}
-	
-	public void setLayoutId(Integer layoutId) {
-		this.layoutId = layoutId;
 	}
 
 	public String getName() {

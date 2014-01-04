@@ -1,25 +1,16 @@
-package com.conversor.bitcoin;
+package com.conversor.altcoin_conversor;
 
 public class Currency {
 	
 	String id;
 	String name;
 	String price;
-	Integer layoutId;
 	
 	public Currency(String id, String price, String name) {
 		super();
 		this.id = id;
 		this.price = price;
 		this.name = name;
-	}
-	
-	public Integer getLayoutId() {
-		return layoutId;
-	}
-
-	public void setLayoutId(Integer layoutId) {
-		this.layoutId = layoutId;
 	}
 	
 	public String getId() {

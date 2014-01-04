@@ -1,9 +1,8 @@
-package com.conversor.bitcoin;
+package com.conversor.altcoin_conversor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.example.bitcoin.R;
 
 public class CoinCalculator {
 	
@@ -11,17 +10,39 @@ public class CoinCalculator {
 	private ArrayList<Currency> currencies = new ArrayList<Currency>();
 	private ArrayList<ValidCurrency> validCurrencies = new ArrayList<ValidCurrency>();
 
-	public CoinCalculator() {
-				
-		this.validCurrencies.add(new ValidCurrency("btc_usd", R.id.btc_usd, "Bitcoin"));
-		this.validCurrencies.add(new ValidCurrency("ltc_usd", R.id.ltc_usd, "Litecoin"));
+	private static CoinCalculator instance;
+	
+	public static CoinCalculator getInstance() {
 		
-		setCurrencies();		
+		if (instance == null) {
+			instance = new CoinCalculator();
+		}
+		return instance;
 	}
 
+	private CoinCalculator() {
+		
+		this.validCurrencies.add(new ValidCurrency("btc_usd", "Bitcoin"));
+		this.validCurrencies.add(new ValidCurrency("ltc_usd", "Litecoin"));
+		this.validCurrencies.add(new ValidCurrency("ppc_usd", "Peercoin"));
+		this.validCurrencies.add(new ValidCurrency("nmc_usd", "Namecoin"));
+		this.validCurrencies.add(new ValidCurrency("xpm_usd", "Primecoin"));
+		this.validCurrencies.add(new ValidCurrency("ftc_usd", "Feathercoin"));
+		this.validCurrencies.add(new ValidCurrency("wdc_usd", "Worldcoin"));
+		
+		setCurrencies();
+	}
+	
 	private void setCurrencies() {
 		
 		this.currencies = new ArrayList<Currency>();
+		
+		this.setAPICurrencies();
+		
+		this.currencies.add(new Currency("usd", "1", "Dollars"));
+	}
+	
+	private void setAPICurrencies() {
 		
 		for (HashMap<String, String> map : coinApi.getPrices()) {
 			
@@ -34,13 +55,9 @@ public class CoinCalculator {
 				String price = map.get("price");
 			
 				Currency currency = new Currency(id, price, validCurrency.getName());
-				currency.setLayoutId(validCurrency.getLayoutId());
-				
 				this.currencies.add(currency);
 			}
 		}
-		
-		this.currencies.add(new Currency("usd", "1", "Dollars"));
 	}
 	
 	private ValidCurrency getValidCurrency(String currency) {
@@ -58,6 +75,22 @@ public class CoinCalculator {
 	public ArrayList<Currency> getCurrencies() {
 				
     	return this.currencies;
+	}
+	
+	public ArrayList<Currency> getCryptoCurrencies() {
+		
+		ArrayList<Currency> currencies = new ArrayList<Currency>();
+	    
+    	for (Currency currency : this.getCurrencies()) {
+    			
+    		if (currency.getId().equals("usd")) {
+    			continue;
+    		}
+    		    		
+        	currencies.add(currency);
+        }
+		
+		return currencies;
 	}
 	
 	public String getPrice(Currency currency) {
@@ -115,7 +148,7 @@ public class CoinCalculator {
 		
 		Float famount = Float.parseFloat(amount);
 		
-		Float result = famount * currencyFrom.getFloatPrice() / currencyTo.getFloatPrice();
+		Float result = famount * currencyTo.getFloatPrice() / currencyFrom.getFloatPrice();
 		
 		return result.toString();
 	}

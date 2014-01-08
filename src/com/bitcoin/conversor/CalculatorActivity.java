@@ -1,4 +1,4 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,17 +8,19 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.atlcoin_conversor.R;
+import com.bitcoin.conversor.R;
 
 public class CalculatorActivity extends Activity {	
 	
-	private CoinCalculator coinCalculator = CoinCalculator.getInstance();
+	private CoinCalculator coinCalculator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.calculator);	   
+	    setContentView(R.layout.calculator);
+	    
+	    coinCalculator = CoinCalculator.getInstance(getApplicationContext());
 	    
 	    new LoadCalculatorCombosTask(this).execute();
 	}

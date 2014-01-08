@@ -1,12 +1,12 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
-public class Currency {
+public class CurrencyPrice {
 	
 	String id;
 	String name;
 	String price;
 	
-	public Currency(String id, String price, String name) {
+	public CurrencyPrice(String id, String price, String name) {
 		super();
 		this.id = id;
 		this.price = price;

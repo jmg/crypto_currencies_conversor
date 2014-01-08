@@ -1,31 +1,32 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
 import java.util.ArrayList;
 
-import com.example.atlcoin_conversor.R;
+import com.bitcoin.conversor.R;
 
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class LoadCurrenciesTask extends AsyncTask<Void, Void, ArrayList<Currency>> {
+public class LoadCurrenciesTask extends AsyncTask<Void, Void, ArrayList<CurrencyPrice>> {
 	
-	private CoinCalculator coinCalculator = CoinCalculator.getInstance();
+	private CoinCalculator coinCalculator;
 	private MainActivity mainActivity;
 	
 	public LoadCurrenciesTask(MainActivity mainActivity) {
 		
 		this.mainActivity = mainActivity;
+		this.coinCalculator = CoinCalculator.getInstance(mainActivity.getApplicationContext());
 	}
 	
 	@Override
-	protected ArrayList<Currency> doInBackground(Void... params) {
+	protected ArrayList<CurrencyPrice> doInBackground(Void... params) {
 		
     	return coinCalculator.getCryptoCurrencies();
     }
     
-    public LinearLayout addCurrencyView(Currency currency) {
+    public LinearLayout addCurrencyView(CurrencyPrice currency) {
     	
     	LinearLayout currencyContainer = new LinearLayout(this.mainActivity);
     	currencyContainer.setOrientation(1);
@@ -51,11 +52,11 @@ public class LoadCurrenciesTask extends AsyncTask<Void, Void, ArrayList<Currency
     	return currencyContainer;
     }
     
-    protected void onPostExecute(ArrayList<Currency> currencies) {
+    protected void onPostExecute(ArrayList<CurrencyPrice> currencies) {
             	
     	LinearLayout container = (LinearLayout) this.mainActivity.findViewById(R.id.currencies_conatiner_lyt); 
         
-    	for (Currency currency: currencies) {
+    	for (CurrencyPrice currency: currencies) {
     		
     		LinearLayout layout = this.addCurrencyView(currency);
     		container.addView(layout);

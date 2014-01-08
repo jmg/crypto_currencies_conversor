@@ -1,6 +1,6 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
-import com.example.atlcoin_conversor.R;
+import com.bitcoin.conversor.R;
 
 import android.os.Bundle;
 import android.app.Activity;

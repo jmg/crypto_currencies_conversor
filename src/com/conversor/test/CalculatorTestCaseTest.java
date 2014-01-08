@@ -9,7 +9,7 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.conversor.altcoin_conversor.CoinCalculator;
+import com.bitcoin.conversor.CoinCalculator;
 
 
 public class CalculatorTestCaseTest {
@@ -19,14 +19,14 @@ public class CalculatorTestCaseTest {
 	@Before
 	public void setUp() {
 		
-		this.coinCalculator = CoinCalculator.getInstance();
+		this.coinCalculator = CoinCalculator.getInstance(null);
 	}
 
 	@Test
 	public void testGetPrices(){				
 		
 		Type expectedType = new ArrayList<HashMap<String, String>>().getClass();	
-		assertEquals(expectedType, coinCalculator.getCoinApi().getPrices().getClass());
+		assertEquals(expectedType, coinCalculator.getCoinApi().getPrices(null).getClass());
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
 import android.view.View;
 import android.widget.AdapterView;

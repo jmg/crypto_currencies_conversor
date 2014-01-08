@@ -1,4 +1,4 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,22 +11,30 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class CoinApi {
 	
 	private String url = "http://www.cryptocoincharts.info/v2/api/tradingPairs";
+	private CoinStorage coinStorage;
 	
-	public ArrayList<HashMap<String,String>> getPrices() {
+	public ArrayList<HashMap<String,String>> getPrices(Context context) {
 				
 		String data = null;
 		
 		try {
 			 data = makeRequest(this.url, "pairs=btc_usd,ltc_usd,nmc_usd,ppc_usd,xpm_usd,wdc_usd,ftc_usd");
+			 
+			 if (context != null) {
+				 coinStorage.setLastPrices(data, context);
+			 }			 
+			 
 		} catch (IOException e) {
-			
-			return new ArrayList<HashMap<String,String>>();
+						
+			data = coinStorage.getLastPrices(context);
 		}	
 		
 	    return parseJson(data);

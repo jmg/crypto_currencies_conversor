@@ -1,11 +1,11 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
-public class ValidCurrency {
+public class Currency {
 	
 	private String id;
 	private String name;
 	
-	public ValidCurrency(String id, String name) {
+	public Currency(String id, String name) {
 		super();
 		this.id = id;
 		this.setName(name);

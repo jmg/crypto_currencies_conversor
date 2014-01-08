@@ -1,41 +1,42 @@
-package com.conversor.altcoin_conversor;
+package com.bitcoin.conversor;
 
 import java.util.ArrayList;
 
-import com.example.atlcoin_conversor.R;
+import com.bitcoin.conversor.R;
 
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 
-public class LoadCalculatorCombosTask extends AsyncTask<Void, Void, ArrayList<Currency>> {
+public class LoadCalculatorCombosTask extends AsyncTask<Void, Void, ArrayList<CurrencyPrice>> {
 	
-	private CoinCalculator coinCalculator = CoinCalculator.getInstance();
+	private CoinCalculator coinCalculator;
 	private CalculatorActivity calculatorActivity;
 
 	public LoadCalculatorCombosTask(CalculatorActivity calculatorActivity) {
 		
 		this.calculatorActivity = calculatorActivity;
+		this.coinCalculator = CoinCalculator.getInstance(calculatorActivity.getApplicationContext());
 	}
 
 	@Override
-	protected ArrayList<Currency> doInBackground(Void... params) {
+	protected ArrayList<CurrencyPrice> doInBackground(Void... params) {
 		
 		return coinCalculator.getCurrencies();
 	}
 	
-	protected void onPostExecute(ArrayList<Currency> currencies) {
+	protected void onPostExecute(ArrayList<CurrencyPrice> currencies) {
 		
 		this.setCombosCurriencies(currencies);		
 		this.calculatorActivity.convert();
     }
 	
-	private void setCombosCurriencies(ArrayList<Currency> currencies) {
+	private void setCombosCurriencies(ArrayList<CurrencyPrice> currencies) {
 		
 		ArrayList<String> arraySpinner = new ArrayList<String>();
     	
-        for (Currency currency : currencies) {
+        for (CurrencyPrice currency : currencies) {
         	
         	arraySpinner.add(currency.getName());
         }

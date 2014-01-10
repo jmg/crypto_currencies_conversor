@@ -1,5 +1,7 @@
 package com.bitcoin.conversor;
 
+import java.util.Locale;
+
 public class CurrencyPrice {
 	
 	String id;
@@ -40,5 +42,10 @@ public class CurrencyPrice {
 	public Float getFloatPrice() {
 
 		return Float.parseFloat(this.getPrice());
+	}
+
+	public String getSymbol() {
+		
+		return this.getId().substring(0, 3).toUpperCase(Locale.getDefault());
 	}
 }

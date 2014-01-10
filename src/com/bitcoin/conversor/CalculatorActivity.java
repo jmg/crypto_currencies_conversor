@@ -45,14 +45,18 @@ public class CalculatorActivity extends Activity {
 		Spinner fromCombo = (Spinner) findViewById(R.id.from_combo);
 		Spinner toCombo = (Spinner) findViewById(R.id.to_combo);
 		
+		CurrencyPrice currencyFrom = this.coinCalculator.getCurrencyByName(fromCombo.getSelectedItem().toString());
+		CurrencyPrice currencyTo = this.coinCalculator.getCurrencyByName(toCombo.getSelectedItem().toString());
+		String amount = amountView.getText().toString();
+		
 		String result = null;
 		try {
-			result = this.coinCalculator.convert(fromCombo.getSelectedItem().toString(), toCombo.getSelectedItem().toString(), amountView.getText().toString());
+			result = this.coinCalculator.convert(currencyFrom, currencyTo, amount);
 		} catch (Exception e) {
 			result = "Please insert a valid amount.";
 		}
 				
-		resultsView.setText("$" + result);
+		resultsView.setText(result + " " + currencyFrom.getSymbol());
 	}
 	
 	public void updateBtnClick(View view) {

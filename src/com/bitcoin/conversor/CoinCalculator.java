@@ -146,18 +146,6 @@ public class CoinCalculator {
 		return currencyObj.getFloatPrice();
 	}
 
-	public String convert(String from, String to, String amount) {
-		
-		CurrencyPrice currencyFrom = this.getCurrencyByName(from);
-		CurrencyPrice currencyTo = this.getCurrencyByName(to);
-		
-		Float famount = Float.parseFloat(amount);
-		
-		Float result = famount * currencyTo.getFloatPrice() / currencyFrom.getFloatPrice();
-		
-		return result.toString();
-	}
-
 	public CoinApi getCoinApi() {
 
 		return coinApi;
@@ -166,6 +154,14 @@ public class CoinCalculator {
 	public void update() {
 		
 		this.setCurrencies();
+	}
+
+	public String convert(CurrencyPrice currencyFrom, CurrencyPrice currencyTo, String amount) {
+		
+		Float famount = Float.parseFloat(amount);		
+		Float result = famount * currencyTo.getFloatPrice() / currencyFrom.getFloatPrice();
+		
+		return result.toString();
 	}
 
 }

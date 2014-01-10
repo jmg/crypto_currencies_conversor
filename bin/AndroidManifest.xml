@@ -27,7 +27,7 @@
         
         <activity
         		android:name="com.bitcoin.conversor.CalculatorActivity"
-        		android:label="Calculator Activity">
+        		android:label="Coins Calculator">
 		</activity>	
     </application>
 

@@ -31,10 +31,12 @@
 
             <Button
                 android:id="@+id/calculador_btn"
-                android:layout_width="280dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:onClick="openCalculatorClick"
                 android:text="Calculator" />
+
         </LinearLayout>
     </LinearLayout>
 

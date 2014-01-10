@@ -27,7 +27,7 @@
 
             <EditText
                 android:id="@+id/amount_text"
-                android:layout_width="141dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
@@ -43,7 +43,7 @@
 
             <Button
                 android:id="@+id/convert_btn"
-                android:layout_width="130dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="10dp"
@@ -56,6 +56,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#B1C9DF"
         android:gravity="center_vertical|center_horizontal|center"
         android:orientation="vertical" >
 
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:text="value"
             android:textSize="24sp" />
 
@@ -79,6 +80,7 @@
             android:id="@+id/LinearLayout2"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical" >
 
             <TextView
@@ -86,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="10dp"                
                 android:text="From" />
 
             <Spinner
@@ -101,6 +103,7 @@
         <LinearLayout
             android:layout_width="166dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical" >
 
             <TextView
@@ -124,17 +127,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="#B1C9DF"
+        android:gravity="center_vertical|center_horizontal|center"
         android:orientation="vertical" >
 
         <Button
             android:id="@+id/exchange_rate_btn"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:onClick="exchangeRateBtnClick"
             android:text="Currencies Exchange Rate"
-            android:textAlignment="center"
-            android:layout_marginTop="20dp" />
+            android:textAlignment="center" />
+
     </LinearLayout>
 
 </LinearLayout>

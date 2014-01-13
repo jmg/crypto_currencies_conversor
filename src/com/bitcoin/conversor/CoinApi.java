@@ -19,14 +19,15 @@ import com.google.gson.reflect.TypeToken;
 public class CoinApi {
 	
 	private String url = "http://www.cryptocoincharts.info/v2/api/tradingPairs";
-	private CoinStorage coinStorage;
+	private String pairs = "pairs=btc_usd,ltc_usd,nmc_usd,ppc_usd,xpm_usd,wdc_usd,ftc_usd,qrk_btc";
+	private CoinStorage coinStorage;	
 	
 	public ArrayList<HashMap<String,String>> getPrices(Context context) {
 				
 		String data = null;
 		
 		try {
-			 data = makeRequest(this.url, "pairs=btc_usd,ltc_usd,nmc_usd,ppc_usd,xpm_usd,wdc_usd,ftc_usd");
+			 data = makeRequest(this.url, this.pairs);
 			 
 			 if (context != null) {
 				 coinStorage.setLastPrices(data, context);

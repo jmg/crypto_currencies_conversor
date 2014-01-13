@@ -1,5 +1,7 @@
 package com.bitcoin.conversor;
 
+import java.util.Locale;
+
 public class Currency {
 	
 	private String id;
@@ -25,5 +27,17 @@ public class Currency {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isBTCtoUSD() {
+		
+		String id = this.getId();
+		return id.substring(0, 7).toUpperCase(Locale.getDefault()).equals("BTC_USD");
+	}
+
+	public boolean isBTCExchangeCurrency() {
+		
+		String id = this.getId();
+		return id.substring(4, 7).toUpperCase(Locale.getDefault()).equals("BTC");
 	}	
 }

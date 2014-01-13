@@ -34,6 +34,7 @@ public class CoinCalculator {
 		this.currencies.add(new Currency("xpm_usd", "Primecoin"));
 		this.currencies.add(new Currency("ftc_usd", "Feathercoin"));
 		this.currencies.add(new Currency("wdc_usd", "Worldcoin"));
+		this.currencies.add(new Currency("qrk_btc", "QuarkCoin"));
 		
 		setCurrencies();
 	}
@@ -49,17 +50,30 @@ public class CoinCalculator {
 	
 	private void setAPICurrencies() {
 		
+		CurrencyPrice btcCurrency = null;
+		
 		for (HashMap<String, String> map : coinApi.getPrices(context)) {
 			
-			String id = map.get("id").replace("/", "_");
-			
+			String id = map.get("id").replace("/", "_");			
 			Currency validCurrency = this.getValidCurrency(id);
 			
 			if (validCurrency != null) {
 								
 				String price = map.get("price");
-			
-				CurrencyPrice currency = new CurrencyPrice(id, price, validCurrency.getName());
+				CurrencyPrice currency = null;
+
+				if (!validCurrency.isBTCExchangeCurrency()) {
+					
+					currency = new CurrencyPrice(id, price, validCurrency.getName());
+					
+					if (validCurrency.isBTCtoUSD()) {
+						btcCurrency = currency;
+					}
+					
+				} else {
+					currency = new CurrencyPriceBTC(id, price, validCurrency.getName(), btcCurrency);
+				}
+				
 				this.currenciesPrices.add(currency);
 			}
 		}

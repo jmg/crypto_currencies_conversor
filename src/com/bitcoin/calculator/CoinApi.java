@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -19,15 +19,14 @@ import com.google.gson.reflect.TypeToken;
 public class CoinApi {
 	
 	private String url = "http://www.cryptocoincharts.info/v2/api/tradingPairs";
-	private String pairs = "pairs=btc_usd,ltc_usd,nmc_usd,ppc_usd,xpm_usd,wdc_usd,ftc_usd,qrk_btc";
-	private CoinStorage coinStorage;	
+	private CoinStorage coinStorage;
 	
 	public ArrayList<HashMap<String,String>> getPrices(Context context) {
 				
 		String data = null;
 		
 		try {
-			 data = makeRequest(this.url, this.pairs);
+			 data = makeRequest(this.url, this.getPairs());
 			 
 			 if (context != null) {
 				 coinStorage.setLastPrices(data, context);
@@ -41,6 +40,15 @@ public class CoinApi {
 	    return parseJson(data);
 	}
 	
+	public String getPairs() {
+		
+		String pairs = "pairs=";
+		for (String id : CoinConfig.getInstance().getCurrenciesIds()) {
+			pairs += id + ",";
+		}
+		return pairs.substring(0, pairs.length() - 1);
+	}
+
 	private ArrayList<HashMap<String,String>> parseJson(String json) {
 			
 		Type listType = new TypeToken<ArrayList<HashMap<String,String>>>(){}.getType();

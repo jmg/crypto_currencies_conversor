@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import android.view.View;
 import android.widget.AdapterView;

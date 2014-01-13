@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import java.util.Locale;
 
@@ -40,12 +40,18 @@ public class CurrencyPrice {
 	}
 
 	public Float getFloatPrice() {
-
-		return Float.parseFloat(this.getPrice());
+		
+		try {
+			return Float.parseFloat(this.getPrice());
+		}
+		catch (Exception e) {
+			return Float.valueOf(0);
+		}		
 	}
 
 	public String getSymbol() {
 		
-		return this.getId().substring(0, 3).toUpperCase(Locale.getDefault());
+		String[] parts = this.getId().split("_");
+		return parts[0].toUpperCase(Locale.getDefault());
 	}
 }

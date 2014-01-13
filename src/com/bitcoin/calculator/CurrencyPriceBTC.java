@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 public class CurrencyPriceBTC extends CurrencyPrice {
 
@@ -14,7 +14,7 @@ public class CurrencyPriceBTC extends CurrencyPrice {
 	public String getPrice() {
 		
 		if (this.btcCurrency == null) {
-			return "0";
+			return "-";
 		}
 		
 		Float price = Float.parseFloat(this.price) * this.btcCurrency.getFloatPrice(); 

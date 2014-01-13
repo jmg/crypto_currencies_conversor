@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,7 @@ public class LoadCurrenciesTask extends AsyncTask<Void, Void, ArrayList<Currency
 	
 	private CoinCalculator coinCalculator;
 	private MainActivity mainActivity;
+	static final String EXTRA_CURRENCY_INDEX = "com.bitcoin.calculator.EXTRA_CURRENCY_INDEX";
 	
 	public LoadCurrenciesTask(MainActivity mainActivity) {
 		
@@ -36,32 +37,39 @@ public class LoadCurrenciesTask extends AsyncTask<Void, Void, ArrayList<Currency
     	currencyContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
     	    	
     	TextView labelTextView = new TextView(this.mainActivity);
-        labelTextView.setTextSize(15);
+        labelTextView.setTextSize(16);
         labelTextView.setText(currency.getName() + " - USD");
         labelTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         labelTextView.setPadding(0, 5, 0, 5);
         
-        String value = this.coinCalculator.getFloatPrice(currency.getId()).toString();
+        String value = this.coinCalculator.getFormattedPrice(currency.getId());        
 
         TextView priceTextView = new TextView(this.mainActivity);
         priceTextView.setTextSize(20);
-    	priceTextView.setText("$" + value);
+    	priceTextView.setText(value);
     	priceTextView.setGravity(Gravity.CENTER_HORIZONTAL);
     	priceTextView.setPadding(0, 5, 0, 5);
     	
-    	String color;
-    	if (index % 2 == 0) {
-    		color = "#B1C9DF";
-    	} else {
-    		color = "#CDD6DE";
-    	}    	
+    	String color = getRowColor(index);
+    	
     	currencyContainer.setBackgroundColor(Color.parseColor(color));
     	
     	currencyContainer.addView(labelTextView);
     	currencyContainer.addView(priceTextView);
     	
+    	currencyContainer.setOnClickListener(new CurrenciesOnTouchListener(this.mainActivity, currencyContainer, index));
+    	
     	return currencyContainer;
     }
+
+	private String getRowColor(int index) {
+		
+		if (index % 2 == 0) {
+    		return "#B1C9DF";
+    	} 
+    	
+		return "#CDD6DE";
+	}
     
     protected void onPostExecute(ArrayList<CurrencyPrice> currencies) {
             	

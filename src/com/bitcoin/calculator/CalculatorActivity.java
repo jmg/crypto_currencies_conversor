@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.bitcoin.conversor.R;
 public class CalculatorActivity extends Activity {	
 	
 	private CoinCalculator coinCalculator;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class CalculatorActivity extends Activity {
 	
 	public void exchangeRateBtnClick(View view) {
 		
-		Intent intent = new Intent(this, MainActivity.class);	
+		Intent intent = new Intent(this, MainActivity.class);		
 		this.startActivity(intent);
 	}
 }

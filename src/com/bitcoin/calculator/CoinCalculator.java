@@ -1,5 +1,6 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,22 +25,23 @@ public class CoinCalculator {
 		
 		return instance;
 	}
+	
+	public static CoinCalculator getInstance() {
+		
+		if (instance == null) {
+			instance = new CoinCalculator();
+		}
+		
+		return instance;
+	}
 
 	private CoinCalculator() {
 		
-		this.currencies.add(new Currency("btc_usd", "Bitcoin"));
-		this.currencies.add(new Currency("ltc_usd", "Litecoin"));
-		this.currencies.add(new Currency("ppc_usd", "Peercoin"));
-		this.currencies.add(new Currency("nmc_usd", "Namecoin"));
-		this.currencies.add(new Currency("xpm_usd", "Primecoin"));
-		this.currencies.add(new Currency("ftc_usd", "Feathercoin"));
-		this.currencies.add(new Currency("wdc_usd", "Worldcoin"));
-		this.currencies.add(new Currency("qrk_btc", "QuarkCoin"));
-		
-		setCurrencies();
+		this.currencies = CoinConfig.getInstance().getCurrencies();		
+		setCurrenciesPrices();
 	}
 	
-	private void setCurrencies() {
+	private void setCurrenciesPrices() {
 		
 		this.currenciesPrices = new ArrayList<CurrencyPrice>();
 		
@@ -167,15 +169,45 @@ public class CoinCalculator {
 
 	public void update() {
 		
-		this.setCurrencies();
+		this.setCurrenciesPrices();
 	}
 
 	public String convert(CurrencyPrice currencyFrom, CurrencyPrice currencyTo, String amount) {
 		
-		Float famount = Float.parseFloat(amount);		
+		Float famount = Float.parseFloat(amount);
 		Float result = famount * currencyTo.getFloatPrice() / currencyFrom.getFloatPrice();
 		
-		return result.toString();
+		return this.formatAmount(result, false);
+	}
+
+	public String getFormattedPrice(String currency) {
+		
+		Float price = this.getFloatPrice(currency);
+						
+		return this.formatAmount(price, true);		
+	}
+	
+	public String formatAmount(Float amount, boolean withDolarSign) {
+		
+		if (amount == 0) {
+			return "-";
+		}	
+		
+		String decimals;
+		if (amount < 0.001) {
+			decimals = "######";
+		} else if (amount < 0.01) {
+			decimals = "#####";
+		} else {
+			decimals = "####";
+		}
+		DecimalFormat decFormat = new DecimalFormat("#." + decimals);
+		
+		String result = decFormat.format(amount);
+		if (withDolarSign) {
+			return "$" + result;
+		}
+		return result;
 	}
 
 }

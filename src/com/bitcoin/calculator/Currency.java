@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import java.util.Locale;
 
@@ -37,7 +37,7 @@ public class Currency {
 
 	public boolean isBTCExchangeCurrency() {
 		
-		String id = this.getId();
-		return id.substring(4, 7).toUpperCase(Locale.getDefault()).equals("BTC");
+		String[] parts = this.getId().split("_");
+		return parts[1].toUpperCase(Locale.getDefault()).equals("BTC");
 	}	
 }

@@ -1,4 +1,4 @@
-package com.bitcoin.conversor;
+package com.bitcoin.calculator;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ public class LoadCalculatorCombosTask extends AsyncTask<Void, Void, ArrayList<Cu
 	
 	private CoinCalculator coinCalculator;
 	private CalculatorActivity calculatorActivity;
+	static final String EXTRA_CURRENCY_INDEX = "com.bitcoin.calculator.EXTRA_CURRENCY_INDEX";
 
 	public LoadCalculatorCombosTask(CalculatorActivity calculatorActivity) {
 		
@@ -44,8 +45,14 @@ public class LoadCalculatorCombosTask extends AsyncTask<Void, Void, ArrayList<Cu
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.calculatorActivity, android.R.layout.simple_spinner_item, arraySpinner);
         Spinner fromCombo = (Spinner) this.calculatorActivity.findViewById(R.id.to_combo);
         fromCombo.setAdapter(adapter);
-        fromCombo.setSelection(0);
-        	
+        
+        Integer currencyIndex = this.calculatorActivity.getIntent().getIntExtra(EXTRA_CURRENCY_INDEX, -1);
+        if (currencyIndex != -1) {
+        	fromCombo.setSelection(currencyIndex);
+        } else {
+        	fromCombo.setSelection(0);
+        }
+        
         Spinner toCombo = (Spinner) this.calculatorActivity.findViewById(R.id.from_combo);
         toCombo.setAdapter(adapter);
         toCombo.setSelection(toCombo.getCount() -1);
